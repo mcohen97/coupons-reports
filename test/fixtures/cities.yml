@@ -4,8 +4,12 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
+one: 
+  country_id: 1
+  name: 'montevideo'
 # column: value
 #
-two: {}
+two: 
+  country_id: 2
+  name: 'buenos aires'
 # column: value

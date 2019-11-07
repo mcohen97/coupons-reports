@@ -2,12 +2,30 @@
 
 one:
   promotion_id: 1
-  from: 1
-  to: 1
+  age_range_id: 1
   count: 1
 
 two:
   promotion_id: 1
-  from: 1
-  to: 1
+  age_range_id: 2
   count: 1
+
+three:
+  promotion_id: 1
+  age_range_id: 3
+  count: 0
+
+four:
+  promotion_id: 2
+  age_range_id: 1
+  count: 0
+
+five:
+  promotion_id: 2
+  age_range_id: 2
+  count: 1
+
+six:
+  promotion_id: 2
+  age_range_id: 3
+  count: 0

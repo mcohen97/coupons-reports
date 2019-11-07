@@ -2,10 +2,15 @@
 
 one:
   promotion_id: 1
-  city: MyString
+  city_id: 1 
   count: 1
 
 two:
   promotion_id: 1
-  city: MyString
+  city_id: 2
+  count: 1
+
+three:
+  promotion_id: 2
+  city_id: 1
   count: 1

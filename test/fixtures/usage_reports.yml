@@ -1,15 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  invocations_count: 
-  negative_response_ratio: 1.5
-  positive_response_ratio: 1.5
-  average_response_time: 1.5
-  total_money_spent: 1.5
+  promotion_id: 1
+  invocations_count: 2
+  negative_responses_count: 1 
+  average_response_time: 0.5
+  total_money_spent: 150
 
 two:
-  invocations_count: 
-  negative_response_ratio: 1.5
-  positive_response_ratio: 1.5
-  average_response_time: 1.5
-  total_money_spent: 1.5
+  promotion_id: 2
+  invocations_count: 1
+  negative_responses_count: 0
+  average_response_time: 0.2
+  total_money_spent: 0

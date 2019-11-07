@@ -1,9 +1,16 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  from: 1
-  to: 1
+  id: 1
+  from: 18
+  to: 25
 
 two:
-  from: 1
-  to: 1
+  id: 2
+  from: 25
+  to: 40
+
+three:
+  id: 3
+  from: 40
+  to: 60

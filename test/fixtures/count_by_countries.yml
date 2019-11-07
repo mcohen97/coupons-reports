@@ -11,6 +11,6 @@ two:
   count: 1
 
 three:
-  promotion_id: 1
+  promotion_id: 2
   country_id: 1
   count: 1

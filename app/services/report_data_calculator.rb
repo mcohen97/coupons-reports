@@ -4,10 +4,11 @@ class ReportDataCalculator
   end
 
   def create_promotions_report(promotion_id, organization_id)
-    report = UsageReport.create!(promotion_id: promotion_id)
+    UsageReport.create!(promotion_id: promotion_id)
     PromotionOrganization.create!(promotion_id:promotion_id, organization_id: organization_id)
     create_age_ranges(promotion_id)
-    return report
+  rescue ActiveRecord::RecordInvalid => e
+    Rails.logger.warn(e.message)
   end
 
   def update_promotion_report(evaluated_promo_info, promotion_id, organization_id)

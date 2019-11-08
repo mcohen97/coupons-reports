@@ -10,6 +10,6 @@ one:
 two:
   promotion_id: 2
   invocations_count: 1
-  negative_responses_count: 0
+  negative_responses_count: 1
   average_response_time: 0.2
   total_money_spent: 0

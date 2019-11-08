@@ -7,9 +7,11 @@ class EvaluatedPromotionPayload
     @total_discounted = result['total_discounted']
     @response_time = result['response_time']
     demographic = data['demographic_data']
-    @birthdate = demographic['birthdate']
-    @city = demographic['city']
-    @country = demographic['country']
+    unless demographic.nil?
+      @birthdate = demographic['birthdate']
+      @city = demographic['city']
+      @country = demographic['country']
+    end
   end
 
   def applicable

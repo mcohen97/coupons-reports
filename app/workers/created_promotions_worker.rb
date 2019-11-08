@@ -1,7 +1,7 @@
 class CreatedPromotionsWorker
   include Sneakers::Worker
   # env is set to nil since by default the actual queue name would have the env appended to the end
-  from_queue "created_promotions", env: nil
+  from_queue ENV['CREATED_PROMOTIONS_QUEUE'], env: nil
 
   # work method receives message payload in raw format
   # in our case it is JSON encoded string

@@ -3,7 +3,7 @@ namespace :rabbitmq do
   task :setup do
     require "bunny"
 
-    connection = Bunny.new
+    connection = Bunny.new(host: ENV['EXCHANGE_SERVER_HOST'], port: ENV['EXCHANGE_SERVER_PORT'])
     connection.start
     channel = connection.create_channel
 

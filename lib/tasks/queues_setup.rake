@@ -8,15 +8,15 @@ namespace :rabbitmq do
     channel = connection.create_channel
 
     # get or create exchange
-    exchange = channel.topic("promotion_events")
+    exchange = channel.topic(ENV['EXCHANGE_TOPIC'])
 
     # get or create queue (note the durable setting)
-    created_promos_queue = channel.queue("created_promotions", durable: true)
-    evaluated_promos_queue = channel.queue("evaluated_promotions", durable: true)
+    created_promos_queue = channel.queue(ENV['CREATED_PROMOTIONS_QUEUE'], durable: true)
+    evaluated_promos_queue = channel.queue(ENV['EVALUATED_PROMOTIONS_QUEUE'], durable: true)
 
     # bind queue to exchange
-    created_promos_queue.bind(exchange, routing_key: 'promotion.created')
-    evaluated_promos_queue.bind(exchange, routing_key: 'promotion.evaluated')
+    created_promos_queue.bind(exchange, routing_key: ENV['CREATED_PROMOTIONS_BINDING_KEY'])
+    evaluated_promos_queue.bind(exchange, routing_key: ENV['EVALUATED_PROMOTIONS_BINDING_KEY'])
 
     connection.close
   end

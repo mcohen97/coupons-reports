@@ -8,7 +8,7 @@ namespace :rabbitmq do
     channel = connection.create_channel
 
     # get or create exchange
-    exchange = channel.topic(ENV['EXCHANGE_TOPIC'])
+    exchange = channel.topic(ENV['EXCHANGE_TOPIC'],durable: true)
 
     # get or create queue (note the durable setting)
     created_promos_queue = channel.queue(ENV['CREATED_PROMOTIONS_QUEUE'], durable: true)

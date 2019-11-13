@@ -22,6 +22,7 @@ class ApplicationController < ActionController::API
     begin
       @decoded = JsonWebToken.decode(header)
       set_organization_id(@decoded)
+      set_permissions(@decoded)
     rescue JWT::DecodeError => e
       render json: { error: 'Invalid token' }, status: :unauthorized
     end
@@ -38,6 +39,10 @@ class ApplicationController < ActionController::API
     else
       @organization_id = org_id
     end
+  end
+
+  def set_permissions(payload)
+    @permissions = payload['permissions'] || []
   end
 
 end

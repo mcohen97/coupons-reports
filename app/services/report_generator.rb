@@ -2,10 +2,14 @@ require './lib/error/promotion_not_found_error.rb'
 require './lib/error/not_authorized_error.rb'
 
 class ReportGenerator
-  
-  def get_usage_report(promotion_id, organization_id)
 
-    check_authorization(promotion_id, organization_id)
+  USAGE_REPORT_PERMISSIONS = ['GET_USAGE_REPORT']
+  DEMOGRAPHIC_REPORT_PERMISSIONS = ['GET_DEMOGRAPHIC_REPORT']
+  
+  def get_usage_report(promotion_id, organization_id, permissions)
+
+    check_organization(promotion_id, organization_id)
+    check_permissions(permissions, USAGE_REPORT_PERMISSIONS)
 
     metadata = UsageReport.where(promotion_id: promotion_id).first
 
@@ -20,14 +24,15 @@ class ReportGenerator
 
     report = UsageReportDto.new(invocations_count: metadata.invocations_count, negative_response_ratio: negative_response_ratio, 
       positive_response_ratio: positive_response_ratio, average_response_time: metadata[:average_response_time], 
-      last_time_updated: metadata[:updated_at])
+      last_time_updated: metadata[:updated_at], total_money_spent: metadata[:total_money_spent])
 
     return report
   end
 
-  def get_demographic_report(promotion_id, organization_id)
+  def get_demographic_report(promotion_id, organization_id, permissions)
 
-    check_authorization(promotion_id, organization_id)
+    check_organization(promotion_id, organization_id)
+    check_permissions(permissions, DEMOGRAPHIC_REPORT_PERMISSIONS)
 
     by_country = CountByCountry.includes(:country).where(promotion_id: promotion_id)
     by_city = CountByCity.includes(:city).where(promotion_id: promotion_id)
@@ -38,13 +43,22 @@ class ReportGenerator
 
 private
 
-  def check_authorization(promotion_id, organization_id)
+  def check_organization(promotion_id, organization_id)
     promo = PromotionOrganization.find_by(promotion_id: promotion_id)
     if promo.nil?
       raise PromotionNotFoundError
     end
     if promo.organization_id != organization_id
       raise NotAuthorizedError, "You can't access other organizations promotions' reports"
+    end
+  end
+
+  def check_permissions(user_permissions, permissions_required)
+
+    authorized = (permissions_required - user_permissions).empty?
+
+    unless authorized
+      raise NotAuthorizedError, "You don't have permissions to access this service"
     end
   end
 

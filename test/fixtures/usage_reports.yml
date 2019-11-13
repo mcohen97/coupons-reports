@@ -6,6 +6,7 @@ one:
   negative_responses_count: 1 
   average_response_time: 0.5
   total_money_spent: 150
+  updated_at: 2018-11-29 12:23:07
 
 two:
   promotion_id: 2
@@ -13,3 +14,4 @@ two:
   negative_responses_count: 1
   average_response_time: 0.2
   total_money_spent: 0
+  updated_at: 2010-02-11 11:02:57

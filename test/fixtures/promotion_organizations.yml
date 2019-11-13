@@ -3,7 +3,7 @@
 
 one: 
   promotion_id: 1
-  organization_id: 2
+  organization_id: 1
 
 two:
   promotion_id: 2

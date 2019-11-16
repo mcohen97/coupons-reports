@@ -1,0 +1,20 @@
+version: '3'
+services:
+  
+  coupons-reports:
+    build: .
+    ports:
+      - "3003:3000"
+    depends_on:
+      - "coupons-db"
+      - "promotion-events"
+
+  coupons-db:
+    image: postgres
+    
+  promotion-events:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+

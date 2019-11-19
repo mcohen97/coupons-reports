@@ -13,9 +13,11 @@ class ReportDataCalculator
 
   def update_promotion_report(evaluated_promo_info, promotion_id, organization_id)
     update_usage_report(evaluated_promo_info, promotion_id, organization_id)
-    update_country_report(evaluated_promo_info.country, promotion_id) if evaluated_promo_info.provides_country?
-    update_city_report(evaluated_promo_info.city, evaluated_promo_info.country , promotion_id) if evaluated_promo_info.provides_country_and_city?
-    update_age_report(evaluated_promo_info.birthdate, promotion_id) if evaluated_promo_info.provides_birthdate?
+    if evaluated_promo_info.demographic_data_provided()
+      update_country_report(evaluated_promo_info.country, promotion_id) if evaluated_promo_info.provides_country?
+      update_city_report(evaluated_promo_info.city, evaluated_promo_info.country , promotion_id) if evaluated_promo_info.provides_country_and_city?
+      update_age_report(evaluated_promo_info.birthdate, promotion_id) if evaluated_promo_info.provides_birthdate?
+    end
   end
 
 private

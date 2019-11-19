@@ -30,4 +30,8 @@ class EvaluatedPromotionPayload
     !@birthdate.nil?
   end  
 
+  def demographic_data_provided
+    return !@birthdate.nil? && !@city.nil? && !@country.nil?
+  end
+
 end

@@ -98,7 +98,7 @@ class EvaluatedPromotionsWorkerTest < ActiveSupport::TestCase
     assert_equal(1, city.count)
   end
 
-  test 'should update only demographic fields available' do
+  test 'should not update demographic fields if one is missing' do
     # if country is not provided, city wont be taken into account
     @test_payload[:evaluation_info][:demographic_data].delete(:country)
     assert_no_difference('CountByAgeRange.count') do
@@ -109,8 +109,8 @@ class EvaluatedPromotionsWorkerTest < ActiveSupport::TestCase
     country = CountByCountry.find_by(promotion_id: 1, country_id: 1)
     city = CountByCity.find_by(promotion_id: 1, city_id: 1)
 
-    # ages asserts
-    assert_equal(2,ages.count)
+    # nothing changes
+    assert_equal(1,ages.count)
     assert_equal(1, country.count)
     assert_equal(1, city.count)
 

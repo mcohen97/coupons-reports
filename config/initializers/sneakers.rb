@@ -1,4 +1,4 @@
-Sneakers.configure :amqp => "amqp://guest:guest@#{ENV['EXCHANGE_SERVER_HOST']}:#{ENV['EXCHANGE_SERVER_PORT']}",
+Sneakers.configure :amqp => ENV['QUEUE_SERVER_HOST'],
                    :exchange => ENV['EXCHANGE_TOPIC'],
                    :exchange_type => :topic,
                    :durable => false

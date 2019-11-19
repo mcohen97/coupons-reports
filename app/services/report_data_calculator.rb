@@ -25,13 +25,11 @@ private
   def create_age_ranges(promotion_id)
     ranges = AgeRange.all
     ranges.each do |range|
-      puts 'creo edades'
       CountByAgeRange.create!(promotion_id: promotion_id, age_range_id: range.id)
     end
   end
 
   def update_country_report(country_name, promotion_id)
-    puts country_name
     record = CountByCountry.includes(:country).where(:countries => {name: country_name},promotion_id: promotion_id).first
  
     if record.nil?
@@ -82,11 +80,6 @@ private
         # if rejected, increment negative responses
         record.negative_responses_count += 1
     end
-
-    puts record.inspect
-    puts record.invocations_count
-    puts record.average_response_time
-    puts evaluated_promo_info.inspect
     
     # update response time
     new_average_response_time = ((record.invocations_count * record.average_response_time) + evaluated_promo_info.response_time)/ new_invocations_count
@@ -105,7 +98,6 @@ private
   def get_age(birth_date)
     now = Time.now.utc.to_date
     date = Date.parse(birth_date)
-    puts date.inspect
     now.year - date.year - ((now.month > date.month || (now.month == date.month && now.day >= date.day)) ? 0 : 1)
   end
   

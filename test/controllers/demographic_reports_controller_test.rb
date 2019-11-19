@@ -12,7 +12,6 @@ class DemographicReportsControllerTest < ActionDispatch::IntegrationTest
     get api_v1_demographic_reports_url(1), headers: { Authorization: APP_KEY1 }
     assert_response :success
     report = JSON.parse(response.body)
-    puts report.inspect
 
     countries = report['countries']
     assert_equal 2, countries.length

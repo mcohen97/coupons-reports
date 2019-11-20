@@ -68,6 +68,7 @@ private
   end
 
   def update_usage_report(evaluated_promo_info, promotion_id, organization_id)
+
     record = UsageReport.where(promotion_id: promotion_id).first
 
     if record.nil?

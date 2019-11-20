@@ -12,18 +12,19 @@ class EvaluatedPromotionsWorker
   durable: true
 
   def work(raw_data)
-    Rails.logger.info("Promotion evaluated: #{raw_data.inspect}")
     raw_data = JSON.parse(raw_data)
+
     id = raw_data['promotion_id']
     org_id = raw_data['organization_id']
     payload = raw_data['evaluation_info']
 
     pass_data_to_service(payload, id, org_id) if correct_data_provided(raw_data)
-
+    
+    Rails.logger.info("Promotion evaluated: #{raw_data.inspect}")
+    
+    ack!
   rescue JSON::ParserError, InvalidPromotionDataError => e
     Rails.logger.error(e.message)
-  ensure
-    ack! 
   end
 
   def pass_data_to_service(payload, id, org_id)

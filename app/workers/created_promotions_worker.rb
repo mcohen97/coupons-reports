@@ -12,14 +12,12 @@ class CreatedPromotionsWorker
   durable: true
 
   def work(raw_data)
-    Rails.logger.info("Promotion created: #{raw_data.inspect}")
     raw_data = JSON.parse(raw_data)
     Services.report_data_calculator.create_promotions_report(raw_data['promotion_id'],raw_data['organization_id']) if correct_data_provided(raw_data)
-  
+    Rails.logger.info("Promotion created: #{raw_data.inspect}")
+    ack!
   rescue JSON::ParserError, InvalidPromotionDataError => e
     Rails.logger.error(e.message)
-  ensure
-    ack!
   end
 
   def correct_data_provided(raw_data)

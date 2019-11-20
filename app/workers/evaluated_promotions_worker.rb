@@ -1,6 +1,8 @@
+require './lib/error/invalid_promotion_data_error.rb'
+
 class EvaluatedPromotionsWorker
   include Sneakers::Worker
-  # env is set to nil since by default the actual queue name would have the env appended to the end
+
   from_queue ENV['EVALUATED_PROMOTIONS_QUEUE'],
   amqp: ENV['QUEUE_SERVER_HOST'],
   exchange: ENV['EXCHANGE_TOPIC'],
@@ -9,10 +11,6 @@ class EvaluatedPromotionsWorker
   env: nil,
   durable: true
 
-  # work method receives message payload in raw format
-  # in our case it is JSON encoded string
-  # which we can pass to service without
-  # changes
   def work(raw_data)
     Rails.logger.info("Promotion evaluated: #{raw_data.inspect}")
     raw_data = JSON.parse(raw_data)
@@ -21,7 +19,11 @@ class EvaluatedPromotionsWorker
     payload = raw_data['evaluation_info']
 
     pass_data_to_service(payload, id, org_id) if correct_data_provided(raw_data)
-    ack! # we need to let queue know that message was received
+
+  rescue JSON::ParserError, InvalidPromotionDataError => e
+    Rails.logger.error(e.message)
+  ensure
+    ack! 
   end
 
   def pass_data_to_service(payload, id, org_id)
@@ -31,7 +33,9 @@ class EvaluatedPromotionsWorker
   end
 
   def correct_data_provided(raw_data)
-    return !raw_data['promotion_id'].nil? && !raw_data['evaluation_info'].nil?
+    Rails.logger.error('Missing promotion ID') if raw_data['promotion_id'].nil?
+    Rails.logger.error('Missing organization ID') if raw_data['organization_id'].nil?
+    return !raw_data['promotion_id'].nil? && !raw_data['organization_id'].nil?
   end
 
 end

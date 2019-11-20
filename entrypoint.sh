@@ -4,8 +4,7 @@ set -e
 # Remove a potentially pre-existing server.pid for Rails.
 rm -f /application/tmp/pids/server.pid
 
-rails RAILS_ENV=production db:create db:migrate db:seed
-rake rabbitmq:setup --trace
+rails RAILS_ENV=production db:migrate db:seed
 
 WORKERS=CreatedPromotionsWorker,EvaluatedPromotionsWorker rake sneakers:run & disown
 

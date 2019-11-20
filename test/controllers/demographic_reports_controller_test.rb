@@ -3,10 +3,11 @@ require 'test_helper'
 class DemographicReportsControllerTest < ActionDispatch::IntegrationTest
 
   # Organization id: 1, Permissions: GET_DEMOGRAPHIC_REPORT
-  APP_KEY1 = 'eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoicGVkaWRvc1lhS2V5Iiwib3JnYW5pemF0aW9uX2lkIjoxLCJwZXJtaXNzaW9ucyI6WyJHRVRfREVNT0dSQVBISUNfUkVQT1JUIl19.1lhSou8nyMUpd5z2Z-RWDJRv78XgfVgFBRaP5NXw3Ho'
+  APP_KEY1 = 'eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoicGVkaWRvc1lhS2V5Iiwib3JnYW5pemF0aW9uX2lkIjoiMSIsInBlcm1pc3Npb25zIjpbIkdFVF9ERU1PR1JBUEhJQ19SRVBPUlQiXX0.jB-0FvB8nofs-0SV8gtw8OoOr_XdFQbXXJFDDPNtjdE'
   
   # Organization id: 1, no permissions
-  APP_KEY2 = 'eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoicGVkaWRvc1lhS2V5Iiwib3JnYW5pemF0aW9uX2lkIjoxLCJwZXJtaXNzaW9ucyI6W119.PcH4QeiQMmRggz98s9nasVuwd4B30Y2m3WBhV_n0Xgc'
+  APP_KEY2 = 'eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoicGVkaWRvc1lhS2V5Iiwib3JnYW5pemF0aW9uX2lkIjoiMSIsInBlcm1pc3Npb25zIjpbXX0.BtRNtdK7cuCarsFZCED_iE-yt6dghaziw7zogeThWes'
+
 
   test 'should generate report correctly ' do
     get api_v1_demographic_reports_url(1), headers: { Authorization: APP_KEY1 }

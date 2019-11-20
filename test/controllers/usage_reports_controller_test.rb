@@ -3,10 +3,10 @@ require 'test_helper'
 class UsageReportsControllerTest < ActionDispatch::IntegrationTest
   
   # Organization id: 1, Permissions: GET_USAGE_REPORT
-  APP_KEY1 = 'eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoicGVkaWRvc1lhS2V5Iiwib3JnYW5pemF0aW9uX2lkIjoxLCJwZXJtaXNzaW9ucyI6WyJHRVRfVVNBR0VfUkVQT1JUIl19.4cUHRybAGTgAYUELwcs600rj-wtZ0OAtFZCDMDlhjz4'
+  APP_KEY1 = 'eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoicGVkaWRvc1lhS2V5Iiwib3JnYW5pemF0aW9uX2lkIjoiMSIsInBlcm1pc3Npb25zIjpbIkdFVF9VU0FHRV9SRVBPUlQiXX0.yH0CPLNtxX_Ilgue1sDJbqsNYpmMZ04q4GqZxh8zMvs'
   
   # Organization id: 1, Permissions: GET_DEMOGRAPHIC_REPORT
-  APP_KEY2 = 'eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoicGVkaWRvc1lhS2V5Iiwib3JnYW5pemF0aW9uX2lkIjoxLCJwZXJtaXNzaW9ucyI6WyJHRVRfREVNT0dSQVBISUNfUkVQT1JUIl19.1lhSou8nyMUpd5z2Z-RWDJRv78XgfVgFBRaP5NXw3Ho'
+  APP_KEY2 = 'eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoicGVkaWRvc1lhS2V5Iiwib3JnYW5pemF0aW9uX2lkIjoiMSIsInBlcm1pc3Npb25zIjpbIkdFVF9ERU1PR1JBUEhJQ19SRVBPUlQiXX0.jB-0FvB8nofs-0SV8gtw8OoOr_XdFQbXXJFDDPNtjdE'
 
   test 'should handle non existing reports' do
     get api_v1_usage_reports_url(5), headers: { Authorization: APP_KEY1 }

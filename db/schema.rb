@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_06_215442) do
+ActiveRecord::Schema.define(version: 2019_11_20_155940) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2019_11_06_215442) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "age_range_id", null: false
     t.index ["age_range_id"], name: "index_count_by_age_ranges_on_age_range_id"
+    t.index ["promotion_id"], name: "index_count_by_age_ranges_on_promotion_id", unique: true
   end
 
   create_table "count_by_cities", force: :cascade do |t|
@@ -46,6 +47,7 @@ ActiveRecord::Schema.define(version: 2019_11_06_215442) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "city_id", null: false
     t.index ["city_id"], name: "index_count_by_cities_on_city_id"
+    t.index ["promotion_id"], name: "index_count_by_cities_on_promotion_id", unique: true
   end
 
   create_table "count_by_countries", force: :cascade do |t|
@@ -55,6 +57,7 @@ ActiveRecord::Schema.define(version: 2019_11_06_215442) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "country_id", null: false
     t.index ["country_id"], name: "index_count_by_countries_on_country_id"
+    t.index ["promotion_id"], name: "index_count_by_countries_on_promotion_id", unique: true
   end
 
   create_table "countries", force: :cascade do |t|
@@ -65,7 +68,7 @@ ActiveRecord::Schema.define(version: 2019_11_06_215442) do
 
   create_table "promotion_organizations", force: :cascade do |t|
     t.integer "promotion_id"
-    t.integer "organization_id"
+    t.string "organization_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["promotion_id"], name: "index_promotion_organizations_on_promotion_id", unique: true
@@ -79,6 +82,7 @@ ActiveRecord::Schema.define(version: 2019_11_06_215442) do
     t.float "total_money_spent", default: 0.0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["promotion_id"], name: "index_usage_reports_on_promotion_id", unique: true
   end
 
   add_foreign_key "cities", "countries"

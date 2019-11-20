@@ -45,10 +45,15 @@ private
 
   def check_organization(promotion_id, organization_id)
     promo = PromotionOrganization.find_by(promotion_id: promotion_id)
+    puts "id org usado #{organization_id.class}"
     if promo.nil?
       raise PromotionNotFoundError
-    end
-    if promo.organization_id != organization_id
+    end    
+    
+    puts "id org requerido #{promo.organization_id.class }"
+
+    if !promo.organization_id.eql?(organization_id)
+      puts 'Son distintos'
       raise NotAuthorizedError, "You can't access other organizations promotions' reports"
     end
   end

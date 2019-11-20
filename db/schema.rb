@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2019_11_20_155940) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "age_range_id", null: false
     t.index ["age_range_id"], name: "index_count_by_age_ranges_on_age_range_id"
-    t.index ["promotion_id"], name: "index_count_by_age_ranges_on_promotion_id", unique: true
+    t.index ["promotion_id", "age_range_id"], name: "index_count_by_age_ranges_on_promotion_id_and_age_range_id", unique: true
   end
 
   create_table "count_by_cities", force: :cascade do |t|
